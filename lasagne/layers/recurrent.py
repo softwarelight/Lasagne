@@ -1421,6 +1421,7 @@ class GRULayer(MergeLayer):
             # Dot against a 1s vector to repeat to shape (num_batch, num_units)
             hid_init = T.dot(T.ones((num_batch, 1)), self.hid_init)
 
+        hid_init = T.unbroadcast(hid_init,0)
         # The hidden-to-hidden weight matrix is always used in step
         non_seqs = [W_hid_stacked]
         # When we aren't precomputing the input outside of scan, we need to
